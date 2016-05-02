@@ -1,0 +1,28 @@
+group 'org.cber.pcb'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.intellij:forms_rt:7.0.3'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceSets {
+    main.java.srcDirs "src/main/java"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'GUITest'
+    }
+}

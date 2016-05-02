@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcbEditor.iml" filepath="$PROJECT_DIR$/.idea/modules/pcbEditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcbEditor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/pcbEditor_main.iml" group="pcbEditor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcbEditor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/pcbEditor_test.iml" group="pcbEditor" />
+    </modules>
+  </component>
+</project>
