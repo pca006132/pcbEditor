@@ -22,6 +22,26 @@ public class BoxCbChain extends CBChain {
     private int signCount = 0;
     private Direction xDir = Direction.positiveX;
     private Direction zDir = Direction.positiveZ;
+
+    public void setxLimit(int limit) {
+        if (limit < 2)
+            throw new IllegalArgumentException();
+        xLimit = limit;
+    }
+    public void setzLimit(int limit) {
+        if (limit < 2)
+            throw new IllegalArgumentException();
+        zLimit = limit;
+    }
+    public void setOuterCase(String block, byte damage) {
+        outerBlock = block;
+        outerDamage = damage;
+    }
+    public void setBaseCase(String block, byte damage) {
+        baseBlock = block;
+        baseDamage = damage;
+    }
+
     public BoxCbChain(int[] coor) {
         super(coor);
     }

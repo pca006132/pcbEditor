@@ -2,6 +2,13 @@ group 'org.cber.pcb'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
+
+idea {
+    project {
+        languageLevel = '1.5'
+    }
+}
 
 sourceCompatibility = 1.8
 
@@ -10,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.intellij:forms_rt:7.0.3'
+
 }
 
 tasks.withType(JavaCompile) {
@@ -23,6 +30,6 @@ sourceSets {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'GUITest'
+        attributes 'Main-Class' : 'Converter'
     }
 }

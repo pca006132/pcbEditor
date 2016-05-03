@@ -71,6 +71,8 @@ public class StraightCbChain extends CBChain {
         initialDir = direction;
     }
     public static void setRowCbLimit(int count) {
+        if (count < 2)
+            throw new IllegalArgumentException();
         limit = count;
     }
     public void disableAutoChangeDirection() {

@@ -27,6 +27,8 @@ public abstract class CBChain implements Iterable<CommandBlock> {
     public abstract List<String> getCommands();
     public String condError() {
         StringBuilder result = new StringBuilder();
+        if (cbStack.size() < 1)
+            return "";
         int lastDamage = cbStack.get(0).getDamage();
         for (CommandBlock cb : cbStack) {
             if (cb.isCond() && cb.getDamage() != lastDamage) {
