@@ -28,7 +28,7 @@ public class CommandUtil {
         setBlock = setBlock.replace("§","\\u00a7");
         return "setblock ~ ~ ~ standing_sign 0 replace {Text1:\"{\\\"text\\\":\\\"" + colorSignText +
                 "\\\",\\\"clickEvent\\\":{\\\"action\\\":\\\"run_command\\\",\\\"value\\\":\\\""
-                + setBlock + "\\\"}}\",Text2:\"\"{\\\"\"text\\\"\":\\\"\"\\\"\"}\"\",Text3:\"\"{\\\"\"text\\\"\":\\\"\"\\\"\"}\"\",Text4:\"\"{\\\"\"text\\\"\":\\\"\"\\\"\"}\"\"}}";
+                + setBlock + "\\\"}}\",Text2:\"{\\\"text\\\":\\\"\\\"}\",Text3:\"{\\\"text\\\":\\\"\\\"}\",Text4:\"{\\\"text\\\":\\\"\\\"}\"}";
     }
 
     public static Long[] randomUUIDPair() {

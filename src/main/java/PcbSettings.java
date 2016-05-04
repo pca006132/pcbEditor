@@ -45,7 +45,7 @@ public class PcbSettings {
     private void parseStraightChainCmd(String cmd) throws IllegalArgumentException{
         String[] elements = cmd.split(" ");
         StraightCbChain chain = new StraightCbChain(coor);
-        if (elements.length % 2 == 1)
+        if (cmd.length() > 0 && elements.length % 2 == 1)
             throw new IllegalArgumentException();
         for (int i =0; i < elements.length - 1; i += 2) {
             String[] subElements = null;

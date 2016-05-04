@@ -16,7 +16,7 @@ public class StraightCbChain extends CBChain {
         super(coor);
     }
     @Override
-    public void addCb(String cmd, int lineNum) {
+    public void addCb(String cmd, int lineNum) throws PcbParseException{
         if (cmd.equals("changeD")) {
             cbStack.peek().setDirection(CoorUtil.directionToCBDamage(Direction.positiveX));
             dir = CoorUtil.inverseDir(dir);

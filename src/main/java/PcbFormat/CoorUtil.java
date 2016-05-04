@@ -5,8 +5,8 @@ package PcbFormat;
  */
 
 public class CoorUtil {
-    public static byte directionToCBDamage(Direction dir) throws IllegalArgumentException {
-        byte damage;
+    public static byte directionToCBDamage(Direction dir) {
+        byte damage = (byte)0;
         switch (dir) {
             case positiveX:
                 damage = 5;
@@ -26,13 +26,11 @@ public class CoorUtil {
             case negativeY:
                 damage = 0;
                 break;
-            default:
-                throw new IllegalArgumentException("方向必须是正负xyz");
         }
         return damage;
     }
     public static Direction CBDamageToDirection(int damage) {
-        Direction dir = Direction.positiveX;;
+        Direction dir = Direction.positiveX;
         switch (damage) {
             case 5:
                 dir = Direction.positiveX;

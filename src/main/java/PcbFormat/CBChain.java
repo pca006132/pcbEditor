@@ -21,7 +21,7 @@ public abstract class CBChain implements Iterable<CommandBlock> {
         else
             return cbStack.peek().getNextCbCoor();
     }
-    public abstract void addCb(String cmd, int lineNum);
+    public abstract void addCb(String cmd, int lineNum) throws PcbParseException;
     public abstract String addSign(String line);
     public abstract CBChain newChain(int[] coor);
     public abstract List<String> getCommands();

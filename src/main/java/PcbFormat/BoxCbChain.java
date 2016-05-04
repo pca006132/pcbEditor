@@ -46,7 +46,7 @@ public class BoxCbChain extends CBChain {
         super(coor);
     }
     @Override
-    public void addCb(String cmd, int lineNum) {
+    public void addCb(String cmd, int lineNum) throws PcbParseException {
         xCount++;
         Direction tempDir = xDir;
         if (xCount == xLimit) {

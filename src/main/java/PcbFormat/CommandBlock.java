@@ -20,7 +20,8 @@ public class CommandBlock {
     public type cb_type = type.ccb;
     private String command;
 
-    public CommandBlock(String cmd, int x, int y, int z, byte direction, int lineNum) {
+    public CommandBlock(String cmd, int x, int y, int z, byte direction, int lineNum)
+    throws PcbParseException{
         relative_x = x;
         relative_y = y;
         relative_z = z;
@@ -43,6 +44,10 @@ public class CommandBlock {
             }
             else if (cmd.startsWith("data:")) {
                 damage = Byte.parseByte(cmd.substring(5,6));
+                if (damage > 7)
+                    throw new PcbParseException("data数值错误: 不可大于7", lineNum);
+                if (cmd.charAt(6) != ' ')
+                    throw new PcbParseException("data前缀错误", lineNum);
                 cmd = cmd.substring(7);
             }
             else {
@@ -77,8 +82,6 @@ public class CommandBlock {
                 block = "command_block";
                 break;
         }
-        return String.format("setblock ~%d ~%d ~%d %s %d replace {Command:\"%s\"%s}", relative_x,
-                relative_y, relative_z, block, damage + (isCond?8:0), CommandUtil.escape(command)
-                , (isAuto?",auto:1b":""));
+        return String.format("setblock ~%d ~%d ~%d %s %d replace {Command:\"%s\"%s}", relative_x, relative_y, relative_z, block, damage + (isCond?8:0), CommandUtil.escape(command) , (isAuto?",auto:1b":""));
     }
 }
