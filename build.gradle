@@ -1,5 +1,5 @@
 group 'org.cber.pcb'
-version '1.1-SNAPSHOT'
+version '1.2-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -9,8 +9,6 @@ idea {
         languageLevel = '1.8'
     }
 }
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
