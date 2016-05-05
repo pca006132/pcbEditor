@@ -20,8 +20,7 @@ public class Converter {
         } catch (NumberFormatException ex) {
             System.out.println("输入参数数值错误");
             System.exit(0);
-        }
-        catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             System.out.println("输入参数错误");
             ex.printStackTrace();
             System.exit(0);
@@ -37,19 +36,16 @@ public class Converter {
             System.exit(0);
         }
         if (sb.length() != 0) {
-            OOC ooc = new OOC();
+            parsePcb parsePcb = new parsePcb();
             String[] commands = null;
             try {
-                commands = ooc.getOOC(sb.toString(), setting.getChain());
+                commands = parsePcb.getOOC(sb.toString(), setting.getChain());
             } catch (PcbParseException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(0);
-            } catch (IllegalArgumentException ex) {
-                System.out.println("输入OOC参数数值错误");
-                System.exit(0);
             }
-
-            System.out.println(ooc.checkForCondDir());
+            //print warning(change dir when cond)
+            System.out.println(parsePcb.checkForCondDir());
             System.out.println("输出OOC到output.txt");
             File newfile = new File("output.txt");
             if (!newfile.exists())
@@ -63,6 +59,8 @@ public class Converter {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"))) {
                 for (String command : commands) {
                     bw.write(command);
+                    bw.newLine();
+                    bw.newLine();
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
