@@ -1,7 +1,6 @@
 package PcbFormat;
 
 import java.util.*;
-import static PcbFormat.CommandUtil.escape;
 
 /**
  * Created by pca006132 on 2016/4/26.
@@ -177,7 +176,7 @@ public class parsePcb {
     }
 
     private String[] Command2OOC(String[] commands) throws PcbParseException {
-        OOC oocs = new OOC(commands);
+        OOCsBuilder oocs = new OOCsBuilder(commands);
         return oocs.getOOCs();
     }
 }
