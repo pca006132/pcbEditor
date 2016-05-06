@@ -70,7 +70,9 @@ public class StraightCbChain extends CBChain {
         cb_cmd.addAll(rcb_cmd);
         return cb_cmd;
     }
-    public static void setDirection(Direction direction) {
+    public static void setDirection(Direction direction) throws IllegalArgumentException {
+        if (direction == Direction.positiveX || direction == Direction.negativeX)
+            throw new IllegalArgumentException();
         initialDir = direction;
     }
     public static void setRowCbLimit(int count) {
