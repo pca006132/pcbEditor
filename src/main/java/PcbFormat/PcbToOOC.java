@@ -6,7 +6,7 @@ import java.util.*;
  * Created by pca006132 on 2016/4/26.
  *
  */
-public class parsePcb {
+public class PcbToOOC {
     public static boolean marker_type = false; //false = AEC, true = AS
     private int current_line_num = 0;
     private Stack<CBChain> chains = new Stack<CBChain>();

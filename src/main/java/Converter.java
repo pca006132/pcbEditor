@@ -36,16 +36,16 @@ public class Converter {
             System.exit(0);
         }
         if (sb.length() != 0) {
-            parsePcb parsePcb = new parsePcb();
+            PcbToOOC PcbToOOC = new PcbToOOC();
             String[] commands = null;
             try {
-                commands = parsePcb.getOOC(sb.toString(), setting.getChain());
+                commands = PcbToOOC.getOOC(sb.toString(), setting.getChain());
             } catch (PcbParseException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(0);
             }
             //print warning(change dir when cond)
-            System.out.println(parsePcb.checkForCondDir());
+            System.out.println(PcbToOOC.checkForCondDir());
             System.out.println("输出OOC到output.txt");
             File newfile = new File("output.txt");
             if (!newfile.exists())
