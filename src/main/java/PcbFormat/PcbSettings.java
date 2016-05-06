@@ -64,6 +64,7 @@ public class PcbSettings {
                         default:
                             throw new IllegalArgumentException();
                     }
+                    chain.setDirection(dir);
             }
         }
         return chain;
