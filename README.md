@@ -19,4 +19,4 @@ TODO List:
     `gradle build`
 
 ## 使用教学:
-    [WIKI](https://github.com/pca006132/pcbEditorCore/wiki)
+    [wiki](https://github.com/pca006132/pcbEditorCore/wiki)
