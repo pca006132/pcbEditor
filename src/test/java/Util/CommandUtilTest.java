@@ -1,8 +1,9 @@
-package PcbFormat;
+package Util;
 
 import org.junit.*;
+
+import static Util.CommandUtil.*;
 import static org.junit.Assert.*;
-import static PcbFormat.CommandUtil.*;
 /**
  * Created by pca006132 on 2016/5/4.
  */

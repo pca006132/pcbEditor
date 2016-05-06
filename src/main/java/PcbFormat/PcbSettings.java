@@ -1,4 +1,6 @@
-import PcbFormat.*;
+package PcbFormat;
+
+import Util.Direction;
 
 /**
  * Created by pca006132 on 2016/5/3.

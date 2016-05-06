@@ -1,7 +1,9 @@
-package PcbFormat;
+package Util;
 
-import static PcbFormat.CommandUtil.colorBlackTech;
-import static PcbFormat.CommandUtil.escape;
+import PcbFormat.PcbParseException;
+
+import static Util.CommandUtil.colorBlackTech;
+import static Util.CommandUtil.escape;
 
 /**
  * Created by pca006132 on 2016/5/5.

@@ -1,4 +1,6 @@
-package PcbFormat;
+package Util;
+
+import PcbFormat.PcbParseException;
 
 import java.util.List;
 import java.util.Stack;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class OOCsBuilder {
     private Stack<SingleOOC> oocs = new Stack<>();
-    public OOCsBuilder(String[] commands) throws PcbParseException{
+    public OOCsBuilder(String[] commands) throws PcbParseException {
         oocs.push(new SingleOOC());
         for (String cmd : commands) {
             if (oocs.peek().canAddCommand(cmd))

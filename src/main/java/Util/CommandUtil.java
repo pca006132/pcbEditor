@@ -1,4 +1,4 @@
-package PcbFormat; /**
+package Util; /**
  * Created by pca006132 on 2016/3/15.
  */
 import java.util.Random;
