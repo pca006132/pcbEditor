@@ -41,8 +41,8 @@ public class SingleOOC {
         cmd.append(cmdPrefix);
         cmd.append(escape(command));
         cmd.append("\"},");
-        colorModeLength += escape(escape(command)).length() + colorCmdPrefixLength + 4;
-        normalLength += escape(command).length() + cmdPrefixLength + 3;
+        colorModeLength += getDoubleEscapedLength(command) + colorCmdPrefixLength + 4;
+        normalLength += getEscapedLength(command) + cmdPrefixLength + 3;
     }
     public String getOOC() {
         if (useColorBlackTech)
@@ -54,16 +54,41 @@ public class SingleOOC {
         if (escape(command).length() > 30000)
             throw new PcbParseException("单一命令过长");
         if (useColorBlackTech || command.contains("§")) {
-            if (colorModeLength + escape(escape(command)).length() + colorCmdPrefixLength + 4 > 27000)
+            if (colorModeLength + getDoubleEscapedLength(command) + colorCmdPrefixLength + 4 > 27000)
                 return false;
             else
                 return true;
         } else {
-            if (normalLength + escape(command).length() + cmdPrefixLength + 3 > 27000)
+            if (normalLength + getEscapedLength(command) + cmdPrefixLength + 3 > 27000)
                 return false;
             else
                 return true;
         }
+    }
+
+    private int getEscapedLength(String str) {
+        int specialCharCount = 0;
+        int strLength = str.length();
+        for (int i = 0; i < strLength; i++) {
+            switch (str.charAt(i)) {
+                case '"':
+                case '\\':
+                    specialCharCount++;
+            }
+        }
+        return specialCharCount*2 + strLength;
+    }
+    private int getDoubleEscapedLength(String str) {
+        int specialCharCount = 0;
+        int strLength = str.length();
+        for (int i = 0; i < strLength; i++) {
+            switch (str.charAt(i)) {
+                case '"':
+                case '\\':
+                    specialCharCount++;
+            }
+        }
+        return specialCharCount*4 + strLength;
     }
 
     String getNormalOOC() {

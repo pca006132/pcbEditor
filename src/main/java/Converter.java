@@ -39,6 +39,7 @@ public class Converter {
             System.exit(0);
         }
         if (sb.length() != 0) {
+            long currentTime = System.nanoTime();
             PcbToOOC PcbToOOC = new PcbToOOC();
             String[] commands = null;
             try {
@@ -49,6 +50,7 @@ public class Converter {
             }
             //print warning(change dir when cond)
             System.out.println(PcbToOOC.checkForCondDir());
+            System.out.printf("used %d milliseconds", (System.nanoTime() - currentTime)/1000000);
             System.out.println("输出OOC到output.txt");
             File newfile = new File("output.txt");
             if (!newfile.exists())

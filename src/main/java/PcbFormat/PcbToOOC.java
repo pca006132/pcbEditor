@@ -14,7 +14,7 @@ public class PcbToOOC {
     private Stack<CBChain> chains;
 
     public String[] getOOC(String pcb, CBChain chain) throws PcbParseException {
-        chains =  new Stack<CBChain>();
+        chains =  new Stack<>();
         return Command2OOC(PCB2Command(pcb, chain));
     }
 
@@ -43,7 +43,8 @@ public class PcbToOOC {
                     result.append(parts[i]);
                     result.append("\",");
                 }
-                result.replace(result.length() - 1, result.length(), "");
+                int length = result.length();
+                result.replace(length - 1, length, "");
                 result.append(']');
             }
             result.append("}");
@@ -59,7 +60,8 @@ public class PcbToOOC {
                     result.append(parts[i]);
                     result.append("\",");
                 }
-                result.replace(result.length() - 1, result.length(), "");
+                int length = result.length();
+                result.replace(length - 1, length, "");
                 result.append(']');
             }
             result.append("}");
