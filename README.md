@@ -16,7 +16,7 @@ TODO List:
 + 编辑器GUI
 
 ## Compile:
-    `gradle build`
+    gradle build
 
 ## 使用教学:
 [Wiki](../../wiki)
