@@ -17,3 +17,6 @@ TODO List:
 
 ## Compile:
     gradle build
+
+## 使用教学:
+[Wiki](../../wiki)
