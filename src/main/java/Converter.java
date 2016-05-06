@@ -14,9 +14,9 @@ public class Converter {
         System.out.println("文件地址");
         String path = scanner.nextLine();
         System.out.println("设置");
-        PcbSettings setting = null;
+        CBChain setting = null;
         try {
-            setting = new PcbSettings(scanner.nextLine());
+            setting = PcbSettings.getChain(scanner.nextLine());
         } catch (NumberFormatException ex) {
             System.out.println("输入参数数值错误");
             System.exit(0);
@@ -39,7 +39,7 @@ public class Converter {
             PcbToOOC PcbToOOC = new PcbToOOC();
             String[] commands = null;
             try {
-                commands = PcbToOOC.getOOC(sb.toString(), setting.getChain());
+                commands = PcbToOOC.getOOC(sb.toString(), setting);
             } catch (PcbParseException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(0);
@@ -56,7 +56,8 @@ public class Converter {
                     ex.printStackTrace();
                     System.exit(0);
                 }
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"))) {
+            try (BufferedWriter bw =
+                         new BufferedWriter(new FileWriter("output.txt"))) {
                 for (String command : commands) {
                     bw.write(command);
                     bw.newLine();

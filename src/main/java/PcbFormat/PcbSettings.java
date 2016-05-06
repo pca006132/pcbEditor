@@ -6,17 +6,8 @@ import Util.Direction;
  * Created by pca006132 on 2016/5/3.
  */
 public class PcbSettings {
-    int[] coor = {0,2,0};
-    CBChain mode;
-
-    public PcbSettings(String cmd) {
-        if (cmd.startsWith("box ")) {
-            parseBoxCmd(cmd.substring(4));
-        } else {
-            parseStraightChainCmd(cmd);
-        }
-    }
-    private void parseBoxCmd(String cmd) throws IllegalArgumentException {
+    static int[] coor = {0,2,0};
+    private static CBChain parseBoxCmd(String cmd) throws IllegalArgumentException {
         String[] elements = cmd.split(" ");
         BoxCbChain chain = new BoxCbChain(coor);
         if (elements.length % 2 == 1)
@@ -42,9 +33,9 @@ public class PcbSettings {
                     break;
             }
         }
-        mode = chain;
+        return chain;
     }
-    private void parseStraightChainCmd(String cmd) throws IllegalArgumentException{
+    private static CBChain parseStraightChainCmd(String cmd) throws IllegalArgumentException{
         String[] elements = cmd.split(" ");
         StraightCbChain chain = new StraightCbChain(coor);
         if (cmd.length() > 0 && elements.length % 2 == 1)
@@ -75,9 +66,13 @@ public class PcbSettings {
                     }
             }
         }
-        mode = chain;
+        return chain;
     }
-    public CBChain getChain() {
-        return mode;
+    public static CBChain getChain(String cmd) {
+        if (cmd.startsWith("box ")) {
+            return parseBoxCmd(cmd.substring(4));
+        } else {
+            return parseStraightChainCmd(cmd);
+        }
     }
 }
