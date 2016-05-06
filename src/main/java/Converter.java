@@ -25,6 +25,9 @@ public class Converter {
             ex.printStackTrace();
             System.exit(0);
         }
+        System.out.println("使用AEC为marker? Y/N");
+        if (scanner.nextLine().equalsIgnoreCase("y"))
+            PcbToOOC.marker_type = true;
         try (BufferedReader br = new BufferedReader(new FileReader(path));) {
             String line;
             while ((line = br.readLine()) != null) {

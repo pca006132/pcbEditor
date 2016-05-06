@@ -11,9 +11,10 @@ import java.util.*;
 public class PcbToOOC {
     public static boolean marker_type = false; //false = AEC, true = AS
     private int current_line_num = 0;
-    private Stack<CBChain> chains = new Stack<CBChain>();
+    private Stack<CBChain> chains;
 
     public String[] getOOC(String pcb, CBChain chain) throws PcbParseException {
+        chains =  new Stack<CBChain>();
         return Command2OOC(PCB2Command(pcb, chain));
     }
 
