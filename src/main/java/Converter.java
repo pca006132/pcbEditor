@@ -50,8 +50,9 @@ public class Converter {
             }
             //print warning(change dir when cond)
             System.out.println(PcbToOOC.checkForCondDir());
-            System.out.printf("used %d milliseconds", (System.nanoTime() - currentTime)/1000000);
             System.out.println("输出OOC到output.txt");
+            System.out.printf("used %d milliseconds", (System.nanoTime() - currentTime)/1000000);
+            System.out.println();
             File newfile = new File("output.txt");
             if (!newfile.exists())
                 try {

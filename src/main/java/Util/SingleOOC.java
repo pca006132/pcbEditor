@@ -18,9 +18,11 @@ public class SingleOOC {
             "/setblock ~ ~-1 ~ minecraft:lava 15\"},{id:\"MinecartCommandBlock\",Command:\"setblock ~ ~ ~ air 0\"}]}]}";
     final String cmdPrefix = "{id:\"MinecartCommandBlock\",Command:\"";
     final int prefixLength = prefix.length();
-    final int colorPrefixLength = escape(escape(prefix)).length();
+    final int colorPrefixLength = getColorModeLength(prefix);
     final int cmdPrefixLength = cmdPrefix.length();
-    final int colorCmdPrefixLength = escape(escape(cmdPrefix)).length();
+    final int colorCmdPrefixLength = getColorModeLength(cmdPrefix);
+    final int suffixLength = suffix.length();
+    final int colorSuffixLength = getColorModeLength(suffix);
     //end constants
 
     private boolean useColorBlackTech;
@@ -41,7 +43,7 @@ public class SingleOOC {
         cmd.append(cmdPrefix);
         cmd.append(escape(command));
         cmd.append("\"},");
-        colorModeLength += getDoubleEscapedLength(command) + colorCmdPrefixLength + 4;
+        colorModeLength += getColorModeLength(command) + colorCmdPrefixLength + 4;
         normalLength += getEscapedLength(command) + cmdPrefixLength + 3;
     }
     public String getOOC() {
@@ -54,12 +56,12 @@ public class SingleOOC {
         if (escape(command).length() > 30000)
             throw new PcbParseException("单一命令过长");
         if (useColorBlackTech || command.contains("§")) {
-            if (colorModeLength + getDoubleEscapedLength(command) + colorCmdPrefixLength + 4 > 27000)
+            if (colorModeLength + getColorModeLength(command) + colorCmdPrefixLength + 4 + colorSuffixLength > 28000)
                 return false;
             else
                 return true;
         } else {
-            if (normalLength + getEscapedLength(command) + cmdPrefixLength + 3 > 27000)
+            if (normalLength + getEscapedLength(command) + cmdPrefixLength + 3 + suffixLength> 30000)
                 return false;
             else
                 return true;
@@ -76,19 +78,24 @@ public class SingleOOC {
                     specialCharCount++;
             }
         }
-        return specialCharCount*2 + strLength;
+        return specialCharCount + strLength;
+        // (specialCharCount * 2 + non special char count)
     }
-    private int getDoubleEscapedLength(String str) {
+    private int getColorModeLength(String str) {
         int specialCharCount = 0;
+        int colorCharCount = 0;
         int strLength = str.length();
         for (int i = 0; i < strLength; i++) {
             switch (str.charAt(i)) {
                 case '"':
                 case '\\':
                     specialCharCount++;
+                    break;
+                case '§':
+                    colorCharCount+=5; //+ 6(-> 6 char) - 1(from str length)
             }
         }
-        return specialCharCount*4 + strLength;
+        return specialCharCount*3 + strLength + colorCharCount;
     }
 
     String getNormalOOC() {
