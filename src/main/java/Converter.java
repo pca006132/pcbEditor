@@ -29,7 +29,7 @@ public class Converter {
             String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line);
-                sb.append("\n");
+                sb.append(System.lineSeparator());
             }
         } catch (IOException ex) {
             ex.printStackTrace();
