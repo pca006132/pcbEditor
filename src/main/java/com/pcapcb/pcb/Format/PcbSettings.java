@@ -1,6 +1,6 @@
-package PcbFormat;
+package com.pcapcb.pcb.format;
 
-import Util.Direction;
+import com.pcapcb.pcb.utils.Direction;
 
 /**
  * Created by pca006132 on 2016/5/3.

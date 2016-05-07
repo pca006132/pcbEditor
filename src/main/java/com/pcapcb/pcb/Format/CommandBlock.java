@@ -1,7 +1,7 @@
-package PcbFormat;
+package com.pcapcb.pcb.format;
 
-import Util.CoorUtil;
-import Util.CommandUtil;
+import com.pcapcb.pcb.utils.CoorUtil;
+import com.pcapcb.pcb.utils.CommandUtil;
 
 /**
  * Created by pca006132 on 2016/4/26.

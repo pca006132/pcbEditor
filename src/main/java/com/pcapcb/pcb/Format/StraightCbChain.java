@@ -1,7 +1,7 @@
-package PcbFormat;
+package com.pcapcb.pcb.format;
 
-import Util.CoorUtil;
-import Util.Direction;
+import com.pcapcb.pcb.utils.CoorUtil;
+import com.pcapcb.pcb.utils.Direction;
 
 import java.util.ArrayList;
 import java.util.List;

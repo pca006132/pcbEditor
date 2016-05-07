@@ -1,9 +1,9 @@
-package Util;
+package com.pcapcb.pcb.test;
 
 import org.junit.*;
-
-import static Util.CommandUtil.*;
 import static org.junit.Assert.*;
+import static com.pcapcb.pcb.utils.CommandUtil.*;
+
 /**
  * Created by pca006132 on 2016/5/4.
  */

@@ -1,4 +1,4 @@
-package PcbFormat;
+package com.pcapcb.pcb.format;
 
 /**
  * Created by pca006132 on 2016/4/27.

@@ -1,9 +1,9 @@
-package Util;
+package com.pcapcb.pcb.utils;
 
-import PcbFormat.PcbParseException;
+import com.pcapcb.pcb.format.PcbParseException;
 
-import static Util.CommandUtil.colorBlackTech;
-import static Util.CommandUtil.escape;
+import static com.pcapcb.pcb.utils.CommandUtil.colorBlackTech;
+import static com.pcapcb.pcb.utils.CommandUtil.escape;
 
 /**
  * Created by pca006132 on 2016/5/5.

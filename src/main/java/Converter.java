@@ -1,7 +1,10 @@
 import java.io.*;
 import java.util.Scanner;
 
-import PcbFormat.*;
+import com.pcapcb.pcb.format.CBChain;
+import com.pcapcb.pcb.format.PcbParseException;
+import com.pcapcb.pcb.format.PcbSettings;
+import com.pcapcb.pcb.format.PcbToOOC;
 
 
 /**

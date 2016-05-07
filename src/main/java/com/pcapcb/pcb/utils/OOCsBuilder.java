@@ -1,6 +1,6 @@
-package Util;
+package com.pcapcb.pcb.utils;
 
-import PcbFormat.PcbParseException;
+import com.pcapcb.pcb.format.PcbParseException;
 
 import java.util.List;
 import java.util.Stack;

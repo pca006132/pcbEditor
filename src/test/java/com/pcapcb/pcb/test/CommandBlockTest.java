@@ -1,16 +1,18 @@
-package PcbFormat; /**
+package com.pcapcb.pcb.test; /**
  * Created by pca006132 on 2016/5/4.
  */
 import java.util.Arrays;
 import java.util.Collection;
 
+import com.pcapcb.pcb.format.CommandBlock;
+import com.pcapcb.pcb.format.PcbParseException;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
 import static org.junit.Assert.*;
-import static PcbFormat.CommandBlock.type.ccb;
-import static PcbFormat.CommandBlock.type.icb;
-import static PcbFormat.CommandBlock.type.rcb;
+import static com.pcapcb.pcb.format.CommandBlock.type.*;
+
 
 @RunWith(Parameterized.class)
 public class CommandBlockTest {
@@ -20,7 +22,7 @@ public class CommandBlockTest {
     private byte expectedDamage;
     private CommandBlock.type expectedCBType;
 
-    public CommandBlockTest(String cmd, String result, boolean isCond, byte damage, CommandBlock.type typeOfCB) throws PcbParseException{
+    public CommandBlockTest(String cmd, String result, boolean isCond, byte damage, CommandBlock.type typeOfCB) throws PcbParseException {
         cb = new CommandBlock(cmd, 0, 2, 0, (byte)0, 0);
         expectedToString = result;
         expectedIsCond = isCond;

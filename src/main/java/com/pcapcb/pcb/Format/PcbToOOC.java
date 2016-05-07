@@ -1,6 +1,6 @@
-package PcbFormat;
+package com.pcapcb.pcb.format;
 
-import Util.OOCsBuilder;
+import com.pcapcb.pcb.utils.OOCsBuilder;
 
 import java.util.*;
 
