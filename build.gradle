@@ -35,6 +35,6 @@ sourceSets {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'Converter'
+        attributes 'Main-Class' : 'Main'
     }
 }

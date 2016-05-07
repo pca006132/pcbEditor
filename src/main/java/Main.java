@@ -10,7 +10,7 @@ import com.pcapcb.pcb.format.PcbToOOC;
 /**
  * Created by pca006132 on 2016/5/3.
  */
-public class Converter {
+public class Main {
     public static void main(String[] ars) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
