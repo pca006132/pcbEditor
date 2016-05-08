@@ -1,4 +1,4 @@
-group 'org.cber.pcb'
+group 'com.pcapcb'
 version '1.4-SNAPSHOT'
 
 apply plugin: 'java'
@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:4.12"
+    compile "com.fifesoft:rsyntaxtextarea:2.5.8"
 }
 
 tasks.withType(JavaCompile) {
@@ -35,6 +36,10 @@ sourceSets {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'Main'
+        attributes 'Main-Class' : 'com.pcapcb.ui.TextEditor'
+        //attributes 'Main-Class' : 'Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

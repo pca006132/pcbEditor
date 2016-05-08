@@ -7,28 +7,28 @@ import java.util.List;
 /**
  * Created by pca006132 on 2016/5/7.
  */
-public class Tree<T> implements Iterable<T> {
-    private T data;
+public class Tree implements Iterable {
+    public String data;
     List<Tree> children = new ArrayList<>();
 
     @Override
     public Iterator iterator() {
         return children.iterator();
     }
-    public Tree(T data) {
+    public Tree(String data) {
         this.data = data;
     }
     public void addChild(Tree child) {
         children.add(child);
     }
-    public Tree getChild(T data) {
+    public Tree getChild(String data) {
         for (Tree tree : children) {
             if (tree.data == data)
                 return tree;
         }
         return null;
     }
-    public boolean contains(T data) {
+    public boolean contains(String data) {
         for (Tree tree : children) {
             if (tree.data == data)
                 return true;

@@ -10,12 +10,12 @@ import static com.pcapcb.pcb.utils.CommandUtil.escape;
  */
 public class SingleOOC {
     //constants
-    final String prefix = "/summon FallingSand ~ ~1 ~2 " +
+    final String prefix = "/summon FallingSand ~ ~2 ~ " +
             "{Time:1,Block:\"minecraft:redstone_block\",Passengers:" +
             "[{id:\"FallingSand\",Time:1,Block:\"minecraft:activator_rail\"" +
             ",Passengers:[";
     final String suffix = "{id:\"MinecartCommandBlock\",Command:\"" +
-            "/setblock ~ ~-1 ~ minecraft:lava 15\"},{id:\"MinecartCommandBlock\",Command:\"setblock ~ ~ ~ air 0\"}]}]}";
+            "setblock ~ ~1 ~ command_block 0 replace {auto:1b,Command:fill ~ ~ ~ ~ ~-2 ~ air}\"},{id:\"MinecartCommandBlock\",Command:\"kill @e[type=MinecartCommandBlock,r=1]\"}]}]}";
     final String cmdPrefix = "{id:\"MinecartCommandBlock\",Command:\"";
     final int prefixLength = prefix.length();
     final int colorPrefixLength = getColorModeLength(prefix);
