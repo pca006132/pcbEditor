@@ -1,4 +1,4 @@
-package com.pcapcb.ui;
+package com.pcapcb.ui.editor;
 
 import java.util.ArrayList;
 import java.util.List;

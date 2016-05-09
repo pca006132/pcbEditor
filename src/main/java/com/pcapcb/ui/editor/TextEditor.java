@@ -1,4 +1,4 @@
-package com.pcapcb.ui;
+package com.pcapcb.ui.editor;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +20,8 @@ public class TextEditor extends JFrame {
     public TextEditor() {
         JPanel cp = new JPanel(new BorderLayout());
 
+        AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory)TokenMakerFactory.getDefaultInstance();
+        atmf.putMapping("text/pcb", "com.pcapcb.ui.editor.PcbTokenMaker");
         FoldParserManager.get().addFoldParserMapping("text/pcb", new PcbFolding());
         RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
         textArea.setSyntaxEditingStyle("text/pcb");
@@ -37,7 +39,7 @@ public class TextEditor extends JFrame {
             String settingStr = null;
             settingStr = JOptionPane.showInputDialog(this, "setting cmd:");
             if (settingStr == null)
-                return;;
+                return;
 
             CBChain setting = null;
             try {
