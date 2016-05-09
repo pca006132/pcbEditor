@@ -177,7 +177,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             break;
                     }
                     break;
-                case TokenTypes.LITERAL_NUMBER_DECIMAL_INT:
+                case TokenTypes.LITERAL_NUMBER_DECIMAL_INT: //numbers, decimal and relative coor are also included
                     switch (c) {
                         case '-':
                         case '0':
@@ -227,7 +227,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             currentTokenType = Token.IDENTIFIER;
                     }
                     break;                    
-                case TokenTypes.IDENTIFIER:
+                case TokenTypes.IDENTIFIER: //everything else
                     switch (c) {
                         case ' ':
                         case '\t':
@@ -412,7 +412,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             break;
                     }
                     break;
-                case TokenTypes.ERROR_CHAR:
+                case TokenTypes.ERROR_CHAR: // '/' char
                     if (lineStart && c == '/') {
                         currentTokenType = Token.COMMENT_EOL;
                         currentTokenStart = i - 1;
