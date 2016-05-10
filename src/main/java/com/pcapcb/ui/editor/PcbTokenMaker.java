@@ -37,7 +37,6 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
         int end = offset + count;
 
         boolean lineStart = true;
-        boolean escape = false;
         // See, when we find a token, its starting position is always of the form:
         // 'startOffset + (currentTokenStart-offset)'; but since startOffset and
         // offset are constant, tokens' starting positions become:
@@ -162,10 +161,6 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                     } //end of switch c
                     break;
                 case TokenTypes.LITERAL_STRING_DOUBLE_QUOTE:
-                    if (escape) {
-                        escape = false;
-                        break;
-                    }
                     switch (c) {
                         case '"':
                             addToken(text, currentTokenStart,i, Token.LITERAL_STRING_DOUBLE_QUOTE, newStartOffset+currentTokenStart);
@@ -173,7 +168,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             currentTokenType = Token.NULL;
                             break;
                         case '\\':
-                            escape = true;
+                            i++;
                             break;
                     }
                     break;
