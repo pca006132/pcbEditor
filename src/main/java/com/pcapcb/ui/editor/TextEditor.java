@@ -16,6 +16,7 @@ import org.fife.ui.rsyntaxtextarea.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -30,13 +31,16 @@ public class TextEditor extends JFrame {
         FoldParserManager.get().addFoldParserMapping("text/pcb", new PcbFolding());
         RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
         textArea.setSyntaxEditingStyle("text/pcb");
-
         textArea.setLineWrap(true);
         textArea.setBracketMatchingEnabled(true);
         textArea.setCodeFoldingEnabled(true);
         RTextScrollPane sp = new RTextScrollPane(textArea);
         cp.add(sp);
         setContentPane(cp);
+
+        URL iconURL = getClass().getResource("Command_Block.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
 
         JMenuBar menuBar = new JMenuBar();
         JMenuItem menuGenerate = new JMenuItem("生成");
@@ -86,11 +90,11 @@ public class TextEditor extends JFrame {
                 textarea.append("\r\n\r\n");
             }
             frame.setSize(500,300);
+            frame.setIconImage(icon.getImage());
             SwingUtilities.invokeLater(() -> {frame.setVisible(true);});
         });
         menuBar.add(menuGenerate);
         setJMenuBar(menuBar);
-
         setTitle("Fuck this shit i'm out");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
