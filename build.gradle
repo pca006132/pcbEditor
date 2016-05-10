@@ -17,6 +17,7 @@ repositories {
 dependencies {
     testCompile "junit:junit:4.12"
     compile "com.fifesoft:rsyntaxtextarea:2.5.8"
+    compile 'com.jtattoo:JTattoo:1.6.11'
 }
 
 tasks.withType(JavaCompile) {

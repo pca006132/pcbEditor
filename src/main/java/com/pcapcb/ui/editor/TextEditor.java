@@ -3,6 +3,9 @@ package com.pcapcb.ui.editor;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import com.jtattoo.plaf.fast.FastLookAndFeel;
+
+
 import com.pcapcb.pcb.format.CBChain;
 import com.pcapcb.pcb.format.PcbParseException;
 import com.pcapcb.pcb.format.PcbSettings;
@@ -12,6 +15,8 @@ import org.fife.ui.rtextarea.*;
 import org.fife.ui.rsyntaxtextarea.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.Properties;
 
 /**
  * Created by pca006132 on 2016/5/8.
@@ -35,6 +40,11 @@ public class TextEditor extends JFrame {
 
         JMenuBar menuBar = new JMenuBar();
         JMenuItem menuGenerate = new JMenuItem("生成");
+
+        //ctrl+g for window, command+g for osx
+        KeyStroke ctrlG = KeyStroke.getKeyStroke("control G");
+        menuGenerate.setAccelerator(ctrlG);
+
         menuGenerate.addActionListener((l) -> {
             String settingStr = null;
             settingStr = JOptionPane.showInputDialog(this, "setting cmd:");
@@ -88,6 +98,15 @@ public class TextEditor extends JFrame {
     }
     public static void main(String[] args) {
         // Start all Swing applications on the EDT.
+        Properties props = new Properties();
+        props.put("logoString", "pcb");
+        FastLookAndFeel.setCurrentTheme(props);
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.exit(-1);
+        }
         SwingUtilities.invokeLater(() -> {new TextEditor().setVisible(true);});
     }
 }

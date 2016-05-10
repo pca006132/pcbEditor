@@ -222,8 +222,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             currentTokenType = Token.NULL;
                             break;
                         default:
-                            addToken(text, currentTokenStart,i-1, Token.LITERAL_NUMBER_DECIMAL_INT, newStartOffset+currentTokenStart);
-                            currentTokenStart = i;
+                            //all = identifier
                             currentTokenType = Token.IDENTIFIER;
                     }
                     break;                    
@@ -392,24 +391,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                             currentTokenType = Token.NULL;
                             lineStart = false;
                             break;
-                        case '~':
-                        case '-':
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                            //case '.' won't have a . at starting point
-                            addToken(text, currentTokenStart,i-1, Token.IDENTIFIER, newStartOffset+currentTokenStart);
-                            currentTokenStart = i;
-                            currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
-                            lineStart = false;
-                            break;
+                        //else: still identifier
                     }
                     break;
                 case TokenTypes.ERROR_CHAR: // '/' char
