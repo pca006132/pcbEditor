@@ -41,7 +41,9 @@ public class EditorForm extends JFrame {
     }
 
     private void initialize_menu() {
-        menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        flowLayout.setVgap(0);
+        menuBar.setLayout(flowLayout);
 
         JMenu menuFiles = new JMenu("档案");
         //read file

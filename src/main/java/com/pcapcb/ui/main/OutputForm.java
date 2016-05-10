@@ -31,7 +31,6 @@ public class OutputForm extends JFrame {
         panel.add(Box.createHorizontalGlue());
         panel.add(buttonCopy);
 
-
         Container container = getContentPane();
         container.add(pane, BorderLayout.CENTER);
         container.add(panel, BorderLayout.PAGE_END);
