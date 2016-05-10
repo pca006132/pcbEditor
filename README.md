@@ -9,11 +9,6 @@
 + 穷举助手
 + 部分命令生成器(如颜色NBT生成、UUID互换、HideFlag生成、DisableSlot生成、可视化JSON编辑等)
 
-## 目前进度:
-刚从C#版进入java版重构，目前完成了Pcb -> OOC的部分。  
-TODO List:
-+ autocomplete-data -> tree, 供自动补全使用
-+ 编辑器GUI
 
 ## Compile:
     gradle build
