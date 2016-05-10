@@ -5,9 +5,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
 import java.net.URL;
-import java.util.ResourceBundle;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  * Created by pca006132 on 2016/5/10.
@@ -22,7 +20,6 @@ public class OutputForm extends JFrame {
         textArea.setLineWrap(true);
         JScrollPane pane = new JScrollPane(textArea);
         pane.setPreferredSize(new Dimension(450,200));
-        //pane.setBorder(new EmptyBorder(10,10,10,10));
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));

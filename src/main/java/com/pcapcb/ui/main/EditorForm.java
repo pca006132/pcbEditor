@@ -12,9 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 /**
  * Created by pca006132 on 2016/5/10.
@@ -134,7 +132,7 @@ public class EditorForm extends JFrame {
     }
 
     private String[] generateOOC(String pcb, String settingStr) throws
-            NumberFormatException,IllegalArgumentException, PcbParseException{
+            IllegalArgumentException, PcbParseException{
         CBChain setting = null;
         setting = PcbSettings.getChain(settingStr);
 
