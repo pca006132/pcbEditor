@@ -10,6 +10,9 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -28,10 +31,8 @@ public class EditorForm extends JFrame {
 
         JPanel cp = new JPanel(new BorderLayout());
         editor = new TextEditor();
-        menuBar = new JMenuBar();
         initialize_menu();
         cp.add(new RTextScrollPane(editor));
-        setJMenuBar(menuBar);
         setContentPane(cp);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -41,8 +42,12 @@ public class EditorForm extends JFrame {
     }
 
     private void initialize_menu() {
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(0);
+        flowLayout.setHgap(0);
         menuBar.setLayout(flowLayout);
 
         JMenu menuFiles = new JMenu("档案");
@@ -63,7 +68,9 @@ public class EditorForm extends JFrame {
         //ctrl+g for window, command+g for osx
         KeyStroke ctrlG = KeyStroke.getKeyStroke("control G");
         menuGenerate.setAccelerator(ctrlG);
-        menuGenerate.addActionListener((l) -> generate_click());
+        menuGenerate.addActionListener((l) -> {
+            SwingUtilities.invokeLater(() ->generate_click());
+        });
 
         menuBar.add(menuFiles);
         menuBar.add(menuGenerate);
@@ -158,6 +165,16 @@ public class EditorForm extends JFrame {
         props.put("menuTextFont","微软雅黑 PLAIN 15");
         props.put("windowTitleFont","微软雅黑 PLAIN 13");
         props.put("subTextFont","微软雅黑 PLAIN 15");
+        props.put("windowTitleBackgroundColor","80 170 230");
+        props.put("windowBorderColor","80 170 230");
+        props.put("windowInactiveTitleBackgroundColor","170 170 170");
+        props.put("windowInactiveBorderColor","170 170 170");
+        props.put("menuSelectionBackgroundColor","80 170 230");
+        props.put("buttonBackgroundColor","200 225 242");
+        props.put("buttonColorLight","200 225 242");
+        props.put("rolloverColor","200 225 242");
+        props.put("rolloverColorLight","200 225 242");
+
         FastLookAndFeel.setCurrentTheme(props);
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
