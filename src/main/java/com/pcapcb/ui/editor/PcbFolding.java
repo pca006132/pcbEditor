@@ -53,7 +53,8 @@ public class PcbFolding implements FoldParser{
                 }
 
                 //handle //{ and //}
-                if (!inMultilineComment && line.startsWith("//{")) {
+                if (!inMultilineComment && line.startsWith("//") &&
+                        line.endsWith("{")) {
                     if (currentFold == null) {
                         currentFold = new Fold(FoldType.CODE, textArea,
                                 textArea.getLineStartOffset(i));

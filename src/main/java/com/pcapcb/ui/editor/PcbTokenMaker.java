@@ -37,6 +37,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
         int end = offset + count;
 
         boolean lineStart = true;
+        boolean prefixIsData = false;
         // See, when we find a token, its starting position is always of the form:
         // 'startOffset + (currentTokenStart-offset)'; but since startOffset and
         // offset are constant, tokens' starting positions become:
@@ -91,7 +92,8 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                         case '8':
                         case '9':
                         case '.':
-                            lineStart = false;                            
+                            if (lineStart && !prefixIsData)
+                                lineStart = false;
                             currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
                             break;
                         default:
@@ -104,6 +106,12 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                         case ' ':
                         case '\t':
                             //still whitespace
+                            if (prefixIsData) {
+                                //turn off data prefix for more than 1 whitespace
+                                prefixIsData = false;
+                                //turn off linestart, as we don't accept it
+                                lineStart = false;
+                            }
                             break;
                         case '"':
                             lineStart = false;
@@ -222,6 +230,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                     }
                     break;                    
                 case TokenTypes.IDENTIFIER: //everything else
+                    prefixIsData = false;
                     switch (c) {
                         case ' ':
                         case '\t':
@@ -239,16 +248,19 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                                             case 'r':
                                                 if (array[i-2] == 'c' && array[i-1] == 'b') {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.RESERVED_WORD, newStartOffset+currentTokenStart);
+                                                            Token.RESERVED_WORD,
+                                                            newStartOffset+currentTokenStart);
                                                 } else {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.IDENTIFIER, newStartOffset+currentTokenStart);
+                                                            Token.IDENTIFIER,
+                                                            newStartOffset+currentTokenStart);
                                                     lineStart = false;
                                                 }
                                                 break;
                                             default:
                                                 addToken(text, currentTokenStart,i-1,
-                                                        Token.IDENTIFIER, newStartOffset+currentTokenStart);
+                                                        Token.IDENTIFIER,
+                                                        newStartOffset+currentTokenStart);
                                                 lineStart = false;
                                                 break;
                                         }
@@ -259,10 +271,12 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                                                 if (array[i - 3] == 'o' && array[i - 2] == 'n' &&
                                                         array[i - 1] == 'd') {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.RESERVED_WORD, newStartOffset+currentTokenStart);
+                                                            Token.RESERVED_WORD,
+                                                            newStartOffset+currentTokenStart);
                                                 }else {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.IDENTIFIER, newStartOffset+currentTokenStart);
+                                                            Token.IDENTIFIER,
+                                                            newStartOffset+currentTokenStart);
                                                     lineStart = false;
                                                 }
                                                 break;
@@ -270,10 +284,13 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                                                 if (array[i - 3] == 'a' && array[i - 2] == 't' &&
                                                         array[i - 1] == 'a') {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.RESERVED_WORD, newStartOffset+currentTokenStart);
+                                                            Token.RESERVED_WORD,
+                                                            newStartOffset+currentTokenStart);
+                                                    prefixIsData = true;
                                                 }else {
                                                     addToken(text, currentTokenStart,i-1,
-                                                            Token.IDENTIFIER, newStartOffset+currentTokenStart);
+                                                            Token.IDENTIFIER,
+                                                            newStartOffset+currentTokenStart);
                                                     lineStart = false;
                                                 }
                                                 break;
@@ -453,7 +470,10 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                     break;
                 case TokenTypes.COMMENT_EOL:
                     i = end - 1;
-                    addToken(text, currentTokenStart,i, Token.COMMENT_EOL, newStartOffset+currentTokenStart);
+                    if (array[i] == '}' || array[i] == '{')
+                        addToken(text, currentTokenStart,i, Token.COMMENT_DOCUMENTATION, newStartOffset+currentTokenStart);
+                    else
+                        addToken(text, currentTokenStart,i, Token.COMMENT_EOL, newStartOffset+currentTokenStart);
                     // We need to set token type to null so at the bottom we don't add one more token.
                     currentTokenType = Token.NULL;
                     break;
@@ -470,7 +490,7 @@ public class PcbTokenMaker  extends AbstractTokenMaker{
                     i = end - 1;
                     break;
             }
-            if (lineStart)
+            if (lineStart && !prefixIsData)
                 switch (currentTokenType) {
                     case Token.WHITESPACE:
                     case Token.NULL:

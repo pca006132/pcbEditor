@@ -149,9 +149,15 @@ public class EditorForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Start all Swing applications on the EDT.
+        //set properties of look and feel
         Properties props = new Properties();
-        props.put("logoString", "pcb");
+        props.put("logoString", "");
+        props.put("controlTextFont","微软雅黑 PLAIN 15");
+        props.put("systemTextFont","微软雅黑 PLAIN 15");
+        props.put("userTextFont","微软雅黑 PLAIN 15");
+        props.put("menuTextFont","微软雅黑 PLAIN 15");
+        props.put("windowTitleFont","微软雅黑 PLAIN 13");
+        props.put("subTextFont","微软雅黑 PLAIN 15");
         FastLookAndFeel.setCurrentTheme(props);
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
