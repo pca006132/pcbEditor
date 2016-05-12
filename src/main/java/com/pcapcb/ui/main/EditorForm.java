@@ -10,21 +10,21 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Created by pca006132 on 2016/5/10.
  */
 public class EditorForm extends JFrame {
+    ResourceBundle myResources;
     TextEditor editor;
     JMenuBar menuBar;
 
-    public EditorForm() {
+    public EditorForm(ResourceBundle resourceBundle) {
+        myResources = resourceBundle;
         URL iconURL = getClass().getResource("Command_Block.png");
         ImageIcon icon = new ImageIcon(iconURL);
         setIconImage(icon.getImage());
@@ -36,13 +36,14 @@ public class EditorForm extends JFrame {
         setContentPane(cp);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("懒癌卫士");
+        setTitle(myResources.getString("ui.name"));
         pack();
         setLocationRelativeTo(null);
     }
 
     private void initialize_menu() {
         menuBar = new JMenuBar();
+        menuBar.setMinimumSize(new Dimension(50,0));
         setJMenuBar(menuBar);
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
@@ -50,21 +51,21 @@ public class EditorForm extends JFrame {
         flowLayout.setHgap(0);
         menuBar.setLayout(flowLayout);
 
-        JMenu menuFiles = new JMenu("档案");
+        JMenu menuFiles = new JMenu(myResources.getString("ui.menu.file"));
         //read file
-        JMenuItem menuReadFile = new JMenuItem("开启档案");
+        JMenuItem menuReadFile = new JMenuItem(myResources.getString("ui.menu.file.openfile"));
         menuReadFile.addActionListener((l) -> readTXTFile());
         menuFiles.add(menuReadFile);
 
         //save file
-        JMenuItem menuSaveFile = new JMenuItem("储存档案");
+        JMenuItem menuSaveFile = new JMenuItem(myResources.getString("ui.menu.file.savefile"));
         KeyStroke ctrlS = KeyStroke.getKeyStroke("control S");
         menuSaveFile.setAccelerator(ctrlS);
         menuSaveFile.addActionListener((l) -> saveFile());
         menuFiles.add(menuSaveFile);
 
         //generate ooc
-        JMenuItem menuGenerate = new JMenuItem("生成");
+        JMenuItem menuGenerate = new JMenuItem(myResources.getString("ui.generate"));
         //ctrl+g for window, command+g for osx
         KeyStroke ctrlG = KeyStroke.getKeyStroke("control G");
         menuGenerate.setAccelerator(ctrlG);
@@ -88,10 +89,10 @@ public class EditorForm extends JFrame {
         try {
             commands = generateOOC(cmd, settingStr);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this,"输入数值错误");
+            JOptionPane.showMessageDialog(this,myResources.getString("error.number"));
             return;
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this,"输入参数错误");
+            JOptionPane.showMessageDialog(this,myResources.getString("error.para"));
             ex.printStackTrace();
             return;
         } catch (PcbParseException ex) {
@@ -118,7 +119,7 @@ public class EditorForm extends JFrame {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this,"开启档案时遇上错误");
+            JOptionPane.showMessageDialog(this,myResources.getString("error.io.in"));
             return;
         }
         editor.setText(sb.toString());
@@ -135,7 +136,7 @@ public class EditorForm extends JFrame {
             bw.write(editor.getText());
         } catch (IOException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this,"储存档案时遇上错误");
+            JOptionPane.showMessageDialog(this,myResources.getString("error.io.out"));
             return;
         }
     }
@@ -156,24 +157,27 @@ public class EditorForm extends JFrame {
     }
 
     public static void main(String[] args) {
+        ResourceBundle resourceBundle  = ResourceBundle.getBundle("com.pcapcb.ui.main.pcb");
+        
+        String font_15 = String.format("%s PLAIN 15", resourceBundle.getString("ui.font"));
+        String font_13 = String.format("%s PLAIN 13", resourceBundle.getString("ui.font"));
+        
         //set properties of look and feel
         Properties props = new Properties();
         props.put("logoString", "");
-        props.put("controlTextFont","微软雅黑 PLAIN 15");
-        props.put("systemTextFont","微软雅黑 PLAIN 15");
-        props.put("userTextFont","微软雅黑 PLAIN 15");
-        props.put("menuTextFont","微软雅黑 PLAIN 15");
-        props.put("windowTitleFont","微软雅黑 PLAIN 13");
-        props.put("subTextFont","微软雅黑 PLAIN 15");
+        props.put("controlTextFont",font_15);
+        props.put("systemTextFont",font_15);
+        props.put("userTextFont",font_15);
+        props.put("menuTextFont",font_15);
+        props.put("windowTitleFont",font_13);
+        props.put("subTextFont",font_15);
         props.put("windowTitleBackgroundColor","80 170 230");
         props.put("windowBorderColor","80 170 230");
         props.put("windowInactiveTitleBackgroundColor","170 170 170");
         props.put("windowInactiveBorderColor","170 170 170");
-        props.put("menuSelectionBackgroundColor","80 170 230");
-        props.put("buttonBackgroundColor","200 225 242");
-        props.put("buttonColorLight","200 225 242");
-        props.put("rolloverColor","200 225 242");
-        props.put("rolloverColorLight","200 225 242");
+        props.put("menuSelectionBackgroundColor","200 225 242");
+        props.put("buttonBackgroundColor","80 170 230");
+        props.put("textAntiAliasing","on");
 
         FastLookAndFeel.setCurrentTheme(props);
         try {
@@ -182,6 +186,6 @@ public class EditorForm extends JFrame {
             ex.printStackTrace();
             System.exit(-1);
         }
-        SwingUtilities.invokeLater(() -> {new EditorForm().setVisible(true);});
+        SwingUtilities.invokeLater(() -> {new EditorForm(resourceBundle).setVisible(true);});
     }
 }

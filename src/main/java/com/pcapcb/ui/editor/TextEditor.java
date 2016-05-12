@@ -20,7 +20,7 @@ public class TextEditor extends RSyntaxTextArea {
         setCodeFoldingEnabled(true);
         setAnimateBracketMatching(false);
         setFont(new Font("Microsoft Yahei", Font.PLAIN, 16));
-        setCurrentLineHighlightColor(new Color(200,225,242));
+        setCurrentLineHighlightColor(new Color(221,225,242));
         getPopupMenu().remove(1);
     }
 }
