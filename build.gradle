@@ -1,5 +1,10 @@
 group 'com.pcapcb'
-version '1.8-SNAPSHOT'
+version '1.9-SNAPSHOT'
+
+//need to manually remove the older properties files in java
+//(TW and CN when they have the same name)
+//in org.fife.ui.rtextarea
+//and in org.fife.ui.rsyntaxtextarea
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -16,7 +21,7 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:4.12"
-    compile "com.fifesoft:rsyntaxtextarea:2.5.8"
+    compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
     compile 'com.jtattoo:JTattoo:1.6.11'
 }
 
@@ -31,16 +36,22 @@ test {
 }
 
 sourceSets {
-    main.java.srcDirs "src/main/java"
+    main.java {
+        srcDirs "src/main/java"
+    }
     test.java.srcDirs "src/test/java"
 }
 
 jar {
+    file('org/fife/rtextarea/RTextArea_zh_CN.properties').delete()
     manifest {
         attributes 'Main-Class' : 'com.pcapcb.ui.main.EditorForm'
-        //attributes 'Main-Class' : 'Main'
     }
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    doFirst {
+        from (
+            configurations.compile.collect {
+                it.isDirectory() ? it : zipTree(it)
+            }
+        )
     }
 }
