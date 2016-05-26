@@ -84,7 +84,7 @@ public class EditorForm extends JFrame {
         if (settingStr == null)
             return;
         String cmd = editor.getSelectedText();
-        if (cmd.length() == 0)
+        if (editor.getSelectionStart() == editor.getSelectionEnd())
             cmd = editor.getText();
         try {
             commands = generateOOC(cmd, settingStr);
